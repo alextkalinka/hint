@@ -1,7 +1,10 @@
 # hint
 
-<!-- badges: start -->  [![CRAN status](https://www.r-pkg.org/badges/version/hint)](https://CRAN.R-project.org/package=hint)
-  [![metacran downloads](https://cranlogs.r-pkg.org/badges/hint)](https://cran.r-project.org/package=hint)<!-- badges: end -->
+<!-- badges: start -->
+  [![CRAN status](https://www.r-pkg.org/badges/version/hint)](https://CRAN.R-project.org/package=hint)
+  [![metacran downloads](https://cranlogs.r-pkg.org/badges/hint)](https://cran.r-project.org/package=hint)
+[![R build status](https://github.com/alextkalinka/hint/workflows/R-CMD-check/badge.svg)](https://github.com/alextkalinka/hint/actions)
+<!-- badges: end -->
 
 ## Summary
 
@@ -23,7 +26,8 @@ library(hint)
 ## each with 1 ball in each of 29 categories.
 
 phint(29, c(15, 8, 7), vals = 5)
-  v        cum.p1 5 0.0002289938
+  v        cum.p
+1 5 0.0002289938
 
 ## Formalising a hypothesis test using 'hint.test'.
 # Categories given in the first column.
@@ -35,7 +39,13 @@ tt <- hint.test(dd, letters[1:9],
                 letters[4:15], alternative = "greater")
 print(tt)
 
-Hypergeometric intersection testParameters: n  a  b  q  v 20  9 12  0  6  P(X >= v)  =  0.4649917 
+Hypergeometric intersection test
+
+Parameters:
+ n  a  b  q  v 
+20  9 12  0  6 
+
+ P(X >= v)  =  0.4649917 
 
 plot(tt)
 ```
@@ -51,7 +61,13 @@ tt <- hint.test(dd, letters[1:9],
                 letters[9:14], alternative = "less")
 print(tt)
 
-Hypergeometric intersection testParameters: n  a  b  q  v 20  9  6 16  1  P(X <= v)  =  0.1596769
+Hypergeometric intersection test
+
+Parameters:
+ n  a  b  q  v 
+20  9  6 16  1 
+
+ P(X <= v)  =  0.1596769
 
 ```
 
