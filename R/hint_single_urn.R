@@ -26,6 +26,21 @@
 	}
 
 
+#' Drawing Distinct Categories from a Single Urn
+#' 
+#' Density, distribution function, quantile function and random generation for the distribution of distinct categories drawn from a single urn in which there are duplicates in q of the categories.
+#' 
+#' @param n An integer specifying the number of categories in the urn.
+#' @param a An integer specifying the number of balls drawn from the urn.
+#' @param q An integer specifying the number of categories in the urn which have duplicate members.
+#' @name Hyperdistinct
+NULL
+#> NULL
+
+#' @rdname Hyperdistinct
+#' @param range A vector of integers specifying the intersection sizes for which probabilities (dhydist) or cumulative probabilites (phydist) should be computed (can be a single number). If range is NULL (default) then probabilities will be returned over the entire range of possible values.
+#' @param log Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
+#' @export
 dhydist <- function(n, a, q, range = NULL, log = FALSE)
 	{
 	# range is a vector giving intersection sizes for which the user wishes to retrieve probabilities.
@@ -45,6 +60,11 @@ dhydist <- function(n, a, q, range = NULL, log = FALSE)
 	}
 
 
+#' @rdname Hyperdistinct
+#' @param vals A vector of integers specifying the intersection sizes for which probabilities (dhydist) or cumulative probabilites (phydist) should be computed (can be a single number). If range is NULL (default) then probabilities will be returned over the entire range of possible values.
+#' @param log.p Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
+#' @param upper.tail Logical. If TRUE, probabilities are P(X >= c), else P(X <= c). Defaults to TRUE.
+#' @export
 phydist <- function(n, a, q, vals, upper.tail = TRUE, log.p = FALSE)
 	{
 	# vals are the values of v for which we want cumulative probabilities.
@@ -91,6 +111,9 @@ phydist <- function(n, a, q, vals, upper.tail = TRUE, log.p = FALSE)
 	}
 
 
+#' @rdname Hyperdistinct
+#' @param p A probability between 0 and 1.
+#' @export
 qhydist <- function(p, n, a, q, upper.tail = TRUE, log.p = FALSE)
 	{
 	# p is a probability.
@@ -112,6 +135,9 @@ qhydist <- function(p, n, a, q, upper.tail = TRUE, log.p = FALSE)
 	}
 
 
+#' @rdname Hyperdistinct
+#' @param num An integer specifying the number of random numbers to generate. Defaults to 5.
+#' @export
 rhydist <- function(num = 5, n, a, q)
 	{
 	crange <- .hydist.check.params(n, a, q)
@@ -147,7 +173,7 @@ rhydist <- function(num = 5, n, a, q)
 
 ### Simulation ###
 
-sim.hydist <- function(n, a, sims = 10000, Na = rep(2,n))
+.sim.hydist <- function(n, a, sims = 10000, Na = rep(2,n))
 	{
 	# Na is a vector with the numbers in each category.
 	sdist <- NULL; na <- NULL
@@ -163,7 +189,4 @@ sim.hydist <- function(n, a, sims = 10000, Na = rep(2,n))
 	cat("\n")
 	return(sdist)
 	}
-
-
-
 

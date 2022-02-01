@@ -2,8 +2,8 @@ Type: Package
 Package: hint
 Title: Tools for hypothesis testing based on Hypergeometric
     Intersection distributions
-Version: 0.1-1
-Date: 2020-10-04
+Version: 0.1-2
+Date: 2022-02-01
 Author: Alex T. Kalinka
 Maintainer: Alex T. Kalinka <alex.t.kalinka@gmail.com>
 Description: Hypergeometric Intersection distributions are a
@@ -12,7 +12,12 @@ Description: Hypergeometric Intersection distributions are a
     containing variable numbers of balls belonging to the same n
     categories. Kalinka (2013) <arXiv:1305.0717>.
 License: GPL (>= 2)
+URL: https://github.com/alextkalinka/hint
+Imports: 
+    graphics,
+    grDevices
 Encoding: UTF-8
 LazyLoad: yes
 NeedsCompilation: yes
 Repository: CRAN
+RoxygenNote: 7.1.0
