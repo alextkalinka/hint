@@ -110,6 +110,7 @@ dhint <- function(n, A, q = 0, range = NULL, approx = FALSE, log = FALSE, verbos
 #' @rdname Hyperintersection
 #' @param vals A vector of integers specifying the intersection sizes for which probabilities (dhint) or cumulative probabilites (phint) should be computed (can be a single number). If range is NULL (default) then probabilities will be returned over the entire range of possible values.
 #' @param log.p Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
+#' @param upper.tail Logical. If TRUE, probabilities are P(X >= c), else P(X <= c). Defaults to TRUE.
 #' @export
 phint <- function(n, A, q = 0, vals, upper.tail = TRUE, log.p = FALSE)
 	{
@@ -158,6 +159,7 @@ phint <- function(n, A, q = 0, vals, upper.tail = TRUE, log.p = FALSE)
 
 
 #' @rdname Hyperintersection
+#' @param p A probability between 0 and 1.
 #' @export
 qhint <- function(p, n, A, q = 0, upper.tail = TRUE, log.p = FALSE)
 	{
@@ -305,7 +307,7 @@ hint.test <- function(cats, draw1, draw2, alternative = "greater")
 #' @param A2 An integer vector specifying the number of balls drawn from the urns for the second distribution.
 #' @param q1 An integer specifying the number of categories with duplicates in the second urn of the first distribution. If 0 then the symmetric, singleton case is computed, otherwise the asymmetric, duplicates case is computed (see \code{\link{Hyperintersection}}).
 #' @param q2 An integer specifying the number of categories with duplicates in the second urn of the second distribution. If 0 then the symmetric, singleton case is computed, otherwise the asymmetric, duplicates case is computed (see \code{\link{Hyperintersection}}).
-#' 
+#' @param alternative A characer string specifying the hypothesis to be tested. Can be one of "greater", "less", or "two.sided".
 #' @details The distribution of absolute distances between two hypergeometric intersection sizes is given by \deqn{P(X=d) = \sum_{\{v_{1},v_{2}\}_{i} \in D_{d}}^{|D_{d}|} P(v_{1_i}|n_{1},a_{1},b_{1},...)\cdot P(v_{2_i}|n_{2},a_{2},b_{2},...) }{P(X=d) = sum_{v1,v2} P(v1)*P(v2) } where \eqn{D_{d}}{D_d} is the set of pairs of intersection sizes, \eqn{\{v_{1},v_{2}\}}{(v_1,v_2)}, with absolute differences of size \eqn{d}{d}.
 #' @return An object of class `hint.dist.test`, which is a list containing the following components:
 #' * `parameters` An integer vector giving the parameter values.

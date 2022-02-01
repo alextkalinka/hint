@@ -124,6 +124,7 @@ pbint <- function(n, A, vals, upper.tail = TRUE, log.p = FALSE)
 
 
 #' @rdname Binomialintersection
+#' @param p A probability between 0 and 1.
 #' @export
 qbint <- function(p, n, A, upper.tail = TRUE, log.p = FALSE)
 	{

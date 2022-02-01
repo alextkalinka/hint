@@ -33,7 +33,11 @@ rhint(num = 5, n, A, q = 0)
 
 \item{vals}{A vector of integers specifying the intersection sizes for which probabilities (dhint) or cumulative probabilites (phint) should be computed (can be a single number). If range is NULL (default) then probabilities will be returned over the entire range of possible values.}
 
+\item{upper.tail}{Logical. If TRUE, probabilities are P(X >= c), else P(X <= c). Defaults to TRUE.}
+
 \item{log.p}{Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.}
+
+\item{p}{A probability between 0 and 1.}
 
 \item{num}{An integer specifying the number of random numbers to generate. Defaults to 5.}
 }

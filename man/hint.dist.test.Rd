@@ -20,6 +20,8 @@ hint.dist.test(d, n1, A1, n2, A2, q1 = 0, q2 = 0, alternative = "greater")
 \item{q1}{An integer specifying the number of categories with duplicates in the second urn of the first distribution. If 0 then the symmetric, singleton case is computed, otherwise the asymmetric, duplicates case is computed (see \code{\link{Hyperintersection}}).}
 
 \item{q2}{An integer specifying the number of categories with duplicates in the second urn of the second distribution. If 0 then the symmetric, singleton case is computed, otherwise the asymmetric, duplicates case is computed (see \code{\link{Hyperintersection}}).}
+
+\item{alternative}{A characer string specifying the hypothesis to be tested. Can be one of "greater", "less", or "two.sided".}
 }
 \value{
 An object of class \code{hint.dist.test}, which is a list containing the following components:

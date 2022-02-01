@@ -31,6 +31,8 @@ rbint(num = 5, n, A)
 
 \item{log.p}{Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.}
 
+\item{p}{A probability between 0 and 1.}
+
 \item{num}{An integer specifying the number of random numbers to generate. Defaults to 5.}
 }
 \description{
