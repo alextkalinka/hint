@@ -30,5 +30,5 @@ Apply the hypergeometric intersection test to categorical data to test for enric
 The hypergeometric intersection distributions describe the distribution of intersection sizes when sampling without replacement from two separate urns in which reside balls belonging to the same n object categories (see \code{\link{Hyperintersection}}).
 }
 \references{
-Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{http://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
+Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{https://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
 }

@@ -41,6 +41,11 @@ NULL
 #' @param range A vector of integers specifying the intersection sizes for which probabilities (dhydist) or cumulative probabilites (phydist) should be computed (can be a single number). If range is NULL (default) then probabilities will be returned over the entire range of possible values.
 #' @param log Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
 #' @export
+#' @examples
+#' ## Generate the distribution of distinct categories drawn from a single urn.
+#' dd <- dhydist(20, 10, 12)
+#' ## Restrict the range of intersections.
+#' dd <- dhydist(20, 10, 12, range = 5:10)
 dhydist <- function(n, a, q, range = NULL, log = FALSE)
 	{
 	# range is a vector giving intersection sizes for which the user wishes to retrieve probabilities.
@@ -65,6 +70,10 @@ dhydist <- function(n, a, q, range = NULL, log = FALSE)
 #' @param log.p Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
 #' @param upper.tail Logical. If TRUE, probabilities are P(X >= c), else P(X <= c). Defaults to TRUE.
 #' @export
+#' @examples
+#' ## Generate cumulative probabilities.
+#' pp <- phydist(29, 15, 8, vals = 5)
+#' pp <- phydist(29, 15, 8, vals = 2, upper.tail = FALSE)
 phydist <- function(n, a, q, vals, upper.tail = TRUE, log.p = FALSE)
 	{
 	# vals are the values of v for which we want cumulative probabilities.
@@ -114,6 +123,9 @@ phydist <- function(n, a, q, vals, upper.tail = TRUE, log.p = FALSE)
 #' @rdname Hyperdistinct
 #' @param p A probability between 0 and 1.
 #' @export
+#' @examples 
+#' ## Extract quantiles:
+#' qq <- qhydist(0.15, 23, 12, 10)
 qhydist <- function(p, n, a, q, upper.tail = TRUE, log.p = FALSE)
 	{
 	# p is a probability.
@@ -125,6 +137,8 @@ qhydist <- function(p, n, a, q, upper.tail = TRUE, log.p = FALSE)
 	dist <- dhydist(n, a, q, range=vals)
 	pvals <- phydist(n, a, q, upper.tail=upper.tail, vals=vals)
 	inds <- which(pvals[,2]<=p)
+	if(length(inds) == 0)
+	  inds <- nrow(pvals)
 	pv <- sum(dist[inds, 2])
 	qq <- pvals[max(inds),1]
 	if(log.p){
@@ -138,6 +152,9 @@ qhydist <- function(p, n, a, q, upper.tail = TRUE, log.p = FALSE)
 #' @rdname Hyperdistinct
 #' @param num An integer specifying the number of random numbers to generate. Defaults to 5.
 #' @export
+#' @examples 
+#' ## Generate random samples based on this distribution.
+#' rr <- rhydist(num = 10, 18, 9, 12)
 rhydist <- function(num = 5, n, a, q)
 	{
 	crange <- .hydist.check.params(n, a, q)

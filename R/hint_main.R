@@ -56,7 +56,7 @@
 #' @name Hyperintersection
 #' @details The hypergeometric intersection distributions describe the distribution of intersection sizes when sampling without replacement from two separate urns in which reside balls belonging to the same n object categories. In the simplest case when there is exactly one ball in each category in each urn (symmetrical, singleton case), then the distribution is hypergeometric: \deqn{P(X=v)=\frac{{a \choose v}{n-a \choose b-v}}{{n \choose b}}}{P(X=v) = (choose(a,v)*choose(n-a,b-v))/choose(n,b)} When there are three urns, the distribution is given by \deqn{P(X=v) = \frac{ {a \choose v} \sum_{i} {a-v \choose i} {n-a \choose b-v-i} {n-v-i \choose c-v} }{ {n \choose b} {n \choose c} } }{P(X=v) = choose(a,v) sum_i choose(a-v,i)*choose(n-a,b-v-i)*choose(n-v-i,c-v)/choose(n,b)*choose(n,c)} If, however, we allow duplicates in \eqn{q \leq n}{q <= n} of the categories in the second urn, then the distribution of intersection sizes is described by the following variant of the hypergeometric: \deqn{P(X=v) = \sum_{m=0}^{\alpha} \sum_{l=0}^{\beta} \sum_{j=0}^{l} {n-q \choose v-l} {q \choose l} {q-l \choose m} {n-v-q+l \choose a-v-m}  {l \choose j} {n+q-a-m-j \choose b-v} / {n \choose a}{n+q \choose b}}{P(X=v) = sum_m sum_l sum_j choose(n-q,v-l)*choose(q,l)*choose(q-l,m)*choose(n-v-q+l,a-v-m)*choose(l,j)*choose(n+q-a-m-j,b-v)/ choose(n,a)*choose(n+q,b)}
 #' @return `dhint`, `phint`, and `qhint` return a data frame with two columns: v, the intersection size, and p, the associated p-values. `rhint` returns an integer vector of random samples based on the hypergeometric intersection distribution.
-#' @references Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{http://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
+#' @references Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{https://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
 #' @rawNamespace useDynLib(hint, .registration = TRUE)
 NULL
 #> NULL
@@ -67,6 +67,13 @@ NULL
 #' @param log Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
 #' @param verbose Logical. If TRUE, progress of calculation in the asymmetric, duplicates case is printed to the screen.
 #' @export
+#' @examples 
+#' ## Generate the distribution of intersections sizes without duplicates:
+#' dd <- dhint(20, c(10, 12))
+#' ## Restrict the range of intersections.
+#' dd <- dhint(20, c(10, 12), range = 0:5)
+#' ## Allow duplicates in q of the categories in the second urn:
+#' dd <- dhint(35, c(15, 11), 22, verbose = FALSE)
 dhint <- function(n, A, q = 0, range = NULL, approx = FALSE, log = FALSE, verbose = TRUE)
 	{
 	# range is a vector giving intersection sizes for which the user wishes to retrieve probabilities.
@@ -112,6 +119,11 @@ dhint <- function(n, A, q = 0, range = NULL, approx = FALSE, log = FALSE, verbos
 #' @param log.p Logical. If TRUE, probabilities p are given as log(p). Defaults to FALSE.
 #' @param upper.tail Logical. If TRUE, probabilities are P(X >= c), else P(X <= c). Defaults to TRUE.
 #' @export
+#' @examples
+#' ## Generate cumulative probabilities.
+#' pp <- phint(29, c(15, 8), vals = 5)
+#' pp <- phint(29, c(15, 8), vals = 2, upper.tail = FALSE)
+#' pp <- phint(29, c(15, 8), 23, vals = 2)
 phint <- function(n, A, q = 0, vals, upper.tail = TRUE, log.p = FALSE)
 	{
 	# vals are the values of v for which we want cumulative probabilities.
@@ -161,6 +173,10 @@ phint <- function(n, A, q = 0, vals, upper.tail = TRUE, log.p = FALSE)
 #' @rdname Hyperintersection
 #' @param p A probability between 0 and 1.
 #' @export
+#' @examples
+#' ## Extract quantiles:
+#' qq <- qhint(0.15, 23, c(12, 10))
+#' qq <- qhint(0.15, 23, c(12, 10), 18)
 qhint <- function(p, n, A, q = 0, upper.tail = TRUE, log.p = FALSE)
 	{
 	# p is a probability.
@@ -185,6 +201,10 @@ qhint <- function(p, n, A, q = 0, upper.tail = TRUE, log.p = FALSE)
 #' @rdname Hyperintersection
 #' @param num An integer specifying the number of random numbers to generate. Defaults to 5.
 #' @export
+#' @examples
+#' ## Generate random samples from Hypergeometric intersection distributions.
+#' rr <- rhint(num = 10, 18, c(9, 14))
+#' rr <- rhint(num = 10, 22, c(11, 17), 12)
 rhint <- function(num = 5, n, A, q = 0)
 	{
 	vrange <- .hint.check.params(n, A, q)
@@ -248,7 +268,7 @@ print.hint.test <- function(x, ...)
 #' * `p.value` A numerical value giving the p-value associated with the test.
 #' * `alternative` A character string naming the hypothesis that was tested.
 #' @md
-#' @references Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{http://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
+#' @references Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{https://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
 #' @export
 hint.test <- function(cats, draw1, draw2, alternative = "greater")
 	{
@@ -586,7 +606,4 @@ hint.dist.test <- function(d, n1, A1, n2, A2, q1 = 0, q2 = 0, alternative = "gre
 	points(breaks, pts, col=col, pch=pch, lwd=lwd)
 	return(invisible())
 	}
-
-
-
 
