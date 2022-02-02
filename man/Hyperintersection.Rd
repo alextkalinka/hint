@@ -50,6 +50,24 @@ The Hypergeometric Intersection Family of Distributions
 \details{
 The hypergeometric intersection distributions describe the distribution of intersection sizes when sampling without replacement from two separate urns in which reside balls belonging to the same n object categories. In the simplest case when there is exactly one ball in each category in each urn (symmetrical, singleton case), then the distribution is hypergeometric: \deqn{P(X=v)=\frac{{a \choose v}{n-a \choose b-v}}{{n \choose b}}}{P(X=v) = (choose(a,v)*choose(n-a,b-v))/choose(n,b)} When there are three urns, the distribution is given by \deqn{P(X=v) = \frac{ {a \choose v} \sum_{i} {a-v \choose i} {n-a \choose b-v-i} {n-v-i \choose c-v} }{ {n \choose b} {n \choose c} } }{P(X=v) = choose(a,v) sum_i choose(a-v,i)*choose(n-a,b-v-i)*choose(n-v-i,c-v)/choose(n,b)*choose(n,c)} If, however, we allow duplicates in \eqn{q \leq n}{q <= n} of the categories in the second urn, then the distribution of intersection sizes is described by the following variant of the hypergeometric: \deqn{P(X=v) = \sum_{m=0}^{\alpha} \sum_{l=0}^{\beta} \sum_{j=0}^{l} {n-q \choose v-l} {q \choose l} {q-l \choose m} {n-v-q+l \choose a-v-m}  {l \choose j} {n+q-a-m-j \choose b-v} / {n \choose a}{n+q \choose b}}{P(X=v) = sum_m sum_l sum_j choose(n-q,v-l)*choose(q,l)*choose(q-l,m)*choose(n-v-q+l,a-v-m)*choose(l,j)*choose(n+q-a-m-j,b-v)/ choose(n,a)*choose(n+q,b)}
 }
+\examples{
+## Generate the distribution of intersections sizes without duplicates:
+dd <- dhint(20, c(10, 12))
+## Restrict the range of intersections.
+dd <- dhint(20, c(10, 12), range = 0:5)
+## Allow duplicates in q of the categories in the second urn:
+dd <- dhint(35, c(15, 11), 22, verbose = FALSE)
+## Generate cumulative probabilities.
+pp <- phint(29, c(15, 8), vals = 5)
+pp <- phint(29, c(15, 8), vals = 2, upper.tail = FALSE)
+pp <- phint(29, c(15, 8), 23, vals = 2)
+## Extract quantiles:
+qq <- qhint(0.15, 23, c(12, 10))
+qq <- qhint(0.15, 23, c(12, 10), 18)
+## Generate random samples from Hypergeometric intersection distributions.
+rr <- rhint(num = 10, 18, c(9, 14))
+rr <- rhint(num = 10, 22, c(11, 17), 12)
+}
 \references{
-Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{http://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
+Kalinka, A. T. (2013). The probability of drawing intersections: extending the hypergeometric distribution. \href{https://arxiv.org/abs/1305.0717}{arXiv.1305.0717}
 }

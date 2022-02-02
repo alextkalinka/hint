@@ -41,3 +41,16 @@ Density, distribution function, quantile function and random generation for the 
 \details{
 The binomial intersection distribution is given by \deqn{  P(X = v|N) = {b \choose v} \left(\prod_{i=1}^{N-1} p_{i}\right)^{v} \left(1 - \prod_{i=1}^{N-1} p_{i}\right)^{b-v} }{ P(X = v|N) = choose(b,v)*((prod_{i=1}^{N-1} p_i)^v) * (1 - prod_{i=1}^{N-1} p_i)^(b-v) } where b gives the sample size which is smallest. This is an approximation for the hypergeometric intersection distribution when \eqn{n}{n} is large and \eqn{b}{b} is small relative to the samples taken from the \eqn{N-1}{N-1} other urns.
 }
+\examples{
+## Generate the distribution of intersections sizes:
+dd <- dbint(20, c(10, 12, 11, 14))
+## Restrict the range of intersections.
+dd <- dbint(20, c(10, 12), range = 0:5)
+## Generate cumulative probabilities.
+pp <- pbint(29, c(15, 8), vals = 5)
+pp <- pbint(29, c(15, 8), vals = 2, upper.tail = FALSE)
+## Extract quantiles:
+qq <- qbint(0.15, 23, c(12, 10))
+## Generate random samples from Binomial intersection distributions.
+rr <- rbint(num = 10, 18, c(9, 14))
+}
